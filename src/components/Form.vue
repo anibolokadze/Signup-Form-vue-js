@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showThankYouMessage">
+  <div v-if="!postRegistratingMessage">
     <Form @submit="onSubmit" ref="form">
       <Field
         name="First Name"
@@ -8,7 +8,7 @@
         v-model="firstName"
         :rules="validateFirstName"
       />
-      <ErrorMessage name="First Name" />
+      <p><ErrorMessage name="First Name" /></p>
 
       <Field
         name="Last Name"
@@ -17,7 +17,7 @@
         v-model="lastName"
         :rules="validateLastName"
       />
-      <ErrorMessage name="Last Name" />
+      <p><ErrorMessage name="Last Name" /></p>
 
       <Field
         name="Email"
@@ -26,7 +26,7 @@
         v-model="email"
         :rules="validateEmail"
       />
-      <ErrorMessage name="Email" />
+      <p><ErrorMessage name="Email" /></p>
 
       <Field
         name="Password"
@@ -35,13 +35,16 @@
         v-model="password"
         :rules="validatePassword"
       />
-      <ErrorMessage name="Password" />
+      <p><ErrorMessage name="Password" /></p>
 
-      <button>CLAIM YOUR FREE TRIAL</button>
+      <button type="submit">CLAIM YOUR FREE TRIAL</button>
     </Form>
   </div>
-  <div v-else>
-    <h1>Thank you</h1>
+
+  <p v-if="registrationErrorMessage">{{ registrationErrorMessage }}</p>
+
+  <div v-if="postRegistratingMessage">
+    <h1>Great! You are now registered</h1>
   </div>
 </template>
 
@@ -56,16 +59,36 @@ export default {
       lastName: "",
       email: "",
       password: "",
-      showThankYouMessage: false,
+      postRegistratingMessage: false,
+      registrationErrorMessage: "",
     };
   },
   methods: {
     onSubmit() {
-      this.$refs.form.validate().then((success) => {
-        if (success) {
-          this.showThankYouMessage = true;
-        }
-      });
+      try {
+        this.$refs.form.validate().then((success) => {
+          if (success) {
+            this.postRegistratingMessage = true;
+          }
+        });
+      } catch (error) {
+        this.registrationErrorMessage =
+          "There was an error submitting the form. Please try again later.";
+      }
+    },
+
+    validateFirstName(value) {
+      if (!value) {
+        return "First Name cannot be empty";
+      }
+      return true;
+    },
+
+    validateLastName(value) {
+      if (!value) {
+        return "Last Name cannot be empty";
+      }
+      return true;
     },
 
     validateEmail(value) {
@@ -75,18 +98,6 @@ export default {
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
         return "Looks like this is not an email";
-      }
-      return true;
-    },
-    validateFirstName(value) {
-      if (!value) {
-        return "First Name cannot be empty";
-      }
-      return true;
-    },
-    validateLastName(value) {
-      if (!value) {
-        return "Last Name cannot be empty";
       }
       return true;
     },
