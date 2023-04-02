@@ -1,47 +1,67 @@
 <template>
-  <div v-if="!postRegistratingMessage">
-    <Form @submit="onSubmit" ref="form">
-      <Field
-        name="First Name"
-        type="text"
-        placeholder="First Name"
-        v-model="firstName"
-        :rules="validateFirstName"
-      />
-      <p><ErrorMessage name="First Name" /></p>
+  <main>
+    <div v-if="!postRegistratingMessage">
+      <div class="info-wrapper">
+        <h1>Learn to code by watching others</h1>
+        <p>
+          See how experienced developers solve problems in real-time. Watching
+          scripted tutorials is great, but understanding how developers think is
+          invaluable.
+        </p>
+      </div>
+      <div class="form-wrapper">
+        <div class="sale-wrapper">
+          <h2>Try it free 7 days then</h2>
+          <p>$20/mo. thereafter</p>
+        </div>
+        <Form @submit="onSubmit" ref="form">
+          <Field
+            name="First Name"
+            type="text"
+            placeholder="First Name"
+            v-model="firstName"
+            :rules="validateFirstName"
+          />
+          <p><ErrorMessage name="First Name" /></p>
 
-      <Field
-        name="Last Name"
-        type="text"
-        placeholder="Last Name"
-        v-model="lastName"
-        :rules="validateLastName"
-      />
-      <p><ErrorMessage name="Last Name" /></p>
+          <Field
+            name="Last Name"
+            type="text"
+            placeholder="Last Name"
+            v-model="lastName"
+            :rules="validateLastName"
+          />
+          <p><ErrorMessage name="Last Name" /></p>
 
-      <Field
-        name="Email"
-        type="email"
-        placeholder="Email Address"
-        v-model="email"
-        :rules="validateEmail"
-      />
-      <p><ErrorMessage name="Email" /></p>
+          <Field
+            name="Email"
+            type="email"
+            placeholder="Email Address"
+            v-model="email"
+            :rules="validateEmail"
+          />
+          <p><ErrorMessage name="Email" /></p>
 
-      <Field
-        name="Password"
-        type="password"
-        placeholder="Password"
-        v-model="password"
-        :rules="validatePassword"
-      />
-      <p><ErrorMessage name="Password" /></p>
+          <Field
+            name="Password"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+            :rules="validatePassword"
+          />
+          <p><ErrorMessage name="Password" /></p>
 
-      <button type="submit">CLAIM YOUR FREE TRIAL</button>
-    </Form>
-  </div>
+          <button type="submit">CLAIM YOUR FREE TRIAL</button>
+          <div class="terms">
+            <p>By clicking the button, you are agreeing to our</p>
+            <span>Terms and Services</span>
+          </div>
+        </Form>
+      </div>
+    </div>
 
-  <p v-if="registrationErrorMessage">{{ registrationErrorMessage }}</p>
+    <p v-if="registrationErrorMessage">{{ registrationErrorMessage }}</p>
+  </main>
 
   <div v-if="postRegistratingMessage">
     <h1>Great! You are now registered</h1>
@@ -116,3 +136,87 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+$Red: hsl(0, 100%, 74%);
+$Green: hsl(154, 59%, 51%);
+$Blue: hsl(248, 32%, 49%);
+$Dark-Blue: hsl(249, 10%, 26%);
+$Grayish-Blue: hsl(246, 25%, 77%);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  text-align: center;
+}
+body {
+  background: $Red;
+  margin: 0 24px;
+  padding: 88px 0;
+}
+h1 {
+  font-size: 28px;
+}
+p {
+  font-weight: 500;
+  font-size: 16px;
+}
+.info-wrapper {
+  display: grid;
+  row-gap: 16px;
+  p {
+    margin-bottom: 64px;
+  }
+}
+.sale-wrapper {
+  height: 88px;
+  background: $Blue;
+  box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h2 {
+    font-size: 15px;
+  }
+}
+Form {
+  background: white;
+  box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
+  border-radius: 10px;
+  height: 100%;
+  padding: 24px 0;
+  margin-top: 24px;
+  input {
+    margin-bottom: 16px;
+    width: 279px;
+    height: 56px;
+    background: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  button {
+    all: unset;
+    background: #38cc8b;
+    box-shadow: inset 0px -4px 0px rgba(0, 0, 0, 0.0908818);
+    border-radius: 5px;
+    width: 279px;
+    height: 56px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+  p {
+    color: $Grayish-Blue;
+    font-size: 11px;
+  }
+  span {
+    color: $Red;
+    font-weight: 700;
+    font-size: 11px;
+  }
+}
+</style>
