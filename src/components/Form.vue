@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="!postRegistratingMessage">
+    <div v-if="!postRegistratingMessage" class="flex">
       <div class="info-wrapper">
         <h1>Learn to code by watching others</h1>
         <p>
@@ -140,6 +140,7 @@ export default {
 <style lang="scss">
 $Red: hsl(0, 100%, 74%);
 $Green: hsl(154, 59%, 51%);
+$Green-Hover: hsla(154, 65%, 68%, 1);
 $Blue: hsl(248, 32%, 49%);
 $Dark-Blue: hsl(249, 10%, 26%);
 $Grayish-Blue: hsl(246, 25%, 77%);
@@ -159,14 +160,13 @@ body {
 }
 h1 {
   font-size: 28px;
+  margin-block: 16px;
 }
 p {
   font-weight: 500;
   font-size: 16px;
 }
 .info-wrapper {
-  display: grid;
-  row-gap: 16px;
   p {
     margin-bottom: 64px;
   }
@@ -187,8 +187,8 @@ Form {
   background: white;
   box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
   border-radius: 10px;
-  height: 100%;
-  padding: 24px 0;
+  height: 90%;
+  padding: 24px;
   margin-top: 24px;
   input {
     margin-bottom: 16px;
@@ -198,6 +198,7 @@ Form {
     border: 1px solid #dedede;
     border-radius: 5px;
     font-weight: 600;
+    width: 90%;
   }
   button {
     all: unset;
@@ -208,15 +209,44 @@ Form {
     height: 56px;
     cursor: pointer;
     margin-bottom: 8px;
+    font-weight: 600;
+    width: 90%;
+    &:hover {
+      background: $Green-Hover;
+    }
   }
   p {
     color: $Grayish-Blue;
     font-size: 11px;
+    margin-bottom: 10px;
   }
   span {
     color: $Red;
     font-weight: 700;
     font-size: 11px;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 50px;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-evenly;
+    .info-wrapper {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h1,
+      p {
+        text-align: left !important;
+      }
+    }
+    .form-wrapper {
+      width: 40%;
+    }
   }
 }
 </style>
