@@ -157,10 +157,13 @@ body {
   background: $Red;
   margin: 0 24px;
   padding: 88px 0;
+  .flex {
+    background-image: url("../assets/bg-intro-mobile.png");
+  }
 }
 h1 {
   font-size: 28px;
-  margin-block: 16px;
+  margin-bottom: 16px;
 }
 p {
   font-weight: 500;
@@ -183,6 +186,9 @@ p {
     font-size: 15px;
   }
 }
+.input--error {
+  border-color: red;
+}
 Form {
   background: white;
   box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688);
@@ -199,6 +205,7 @@ Form {
     border-radius: 5px;
     font-weight: 600;
     width: 90%;
+    color: $Dark-Blue !important;
   }
   button {
     all: unset;
@@ -234,6 +241,7 @@ Form {
   .flex {
     display: flex;
     justify-content: space-evenly;
+    background-image: url("../assets/bg-intro-desktop.png");
     .info-wrapper {
       width: 40%;
       display: flex;
